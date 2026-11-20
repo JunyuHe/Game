@@ -1,0 +1,200 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/shop_ui.gd" id="1_shop"]
+
+[sub_resource type="StyleBoxFlat" id="panel_bg"]
+bg_color = Color(0.0705882, 0.0823529, 0.105882, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.207843, 0.270588, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="ShopUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shop")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.027451, 0.0352941, 0.0509804, 0.95)
+mouse_filter = 0
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 20
+
+[node name="HBox" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Left" type="VBoxContainer" parent="Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="Margin/HBox/Left"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Margin/HBox/Left/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "WEAPON SHOP"
+
+[node name="Spacer" type="Control" parent="Margin/HBox/Left/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GoldLabel" type="Label" parent="Margin/HBox/Left/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.82, 0.3, 1)
+theme_override_font_sizes/font_size = 20
+text = "Gold: 250"
+
+[node name="HintLabel" type="Label" parent="Margin/HBox/Left"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.66, 0.75, 1)
+theme_override_font_sizes/font_size = 14
+text = "B / Tab open · Esc close"
+
+[node name="ItemList" type="VBoxContainer" parent="Margin/HBox/Left"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SellTitle" type="Label" parent="Margin/HBox/Left"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.77, 0.85, 1)
+theme_override_font_sizes/font_size = 15
+text = "Weapons 1 / 6"
+
+[node name="OwnedGrid" type="GridContainer" parent="Margin/HBox/Left"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="MergeLabel" type="Label" parent="Margin/HBox/Left"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.9, 0.55, 1)
+theme_override_font_sizes/font_size = 15
+text = "Auto-merged"
+
+[node name="Spacer2" type="Control" parent="Margin/HBox/Left"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Footer" type="HBoxContainer" parent="Margin/HBox/Left"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="RerollButton" type="Button" parent="Margin/HBox/Left/Footer"]
+custom_minimum_size = Vector2(220, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.82, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "Refresh  60 G"
+
+[node name="CloseButton" type="Button" parent="Margin/HBox/Left/Footer"]
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Close"
+
+[node name="Right" type="PanelContainer" parent="Margin/HBox"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("panel_bg")
+
+[node name="StatsMargin" type="MarginContainer" parent="Margin/HBox/Right"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="Stats" type="VBoxContainer" parent="Margin/HBox/Right/StatsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="StatsTitle" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.82, 0.3, 1)
+theme_override_font_sizes/font_size = 24
+text = "Attributes"
+
+[node name="LevelLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Level: 1"
+
+[node name="HpLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "HP: 5 / 5"
+
+[node name="AtkLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Damage: 5"
+
+[node name="DefLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Defense: 0"
+
+[node name="SpeedLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Speed: 220"
+
+[node name="LuckLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.9, 0.55, 1)
+theme_override_font_sizes/font_size = 16
+text = "Luck: 0%"
+
+[node name="LifestealLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.45, 0.5, 1)
+theme_override_font_sizes/font_size = 16
+text = "Lifesteal: 0%"
+
+[node name="DodgeLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.78, 0.98, 1)
+theme_override_font_sizes/font_size = 16
+text = "Dodge: 0%"
+
+[node name="KillsLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Kills: 0"
+
+[node name="WaveLabel" type="Label" parent="Margin/HBox/Right/StatsMargin/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Wave: 1"

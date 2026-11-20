@@ -6,6 +6,11 @@
 [ext_resource type="Script" uid="uid://c04tbq3ho6b0y" path="res://scripts/spawner.gd" id="4_spawner"]
 [ext_resource type="PackedScene" path="res://scenes/ExpOrb.tscn" id="5_orb"]
 [ext_resource type="PackedScene" path="res://scenes/Obstacle.tscn" id="6_obs"]
+[ext_resource type="PackedScene" path="res://scenes/UpgradeUI.tscn" id="7_upgrade"]
+[ext_resource type="PackedScene" path="res://scenes/PauseMenu.tscn" id="8_pause"]
+[ext_resource type="PackedScene" path="res://scenes/Boss.tscn" id="9_boss"]
+[ext_resource type="PackedScene" path="res://scenes/BossBar.tscn" id="10_bossbar"]
+[ext_resource type="PackedScene" path="res://scenes/ShopUI.tscn" id="11_shop"]
 
 [node name="Main" type="Node2D" unique_id=61513297]
 script = ExtResource("1_main")
@@ -16,6 +21,7 @@ orb_scene = ExtResource("5_orb")
 [node name="MobSpawner" type="Node2D" parent="." unique_id=2093319764]
 script = ExtResource("4_spawner")
 mob_scene = ExtResource("3_mob")
+boss_scene = ExtResource("9_boss")
 
 [node name="Tree1" parent="." unique_id=126591452 instance=ExtResource("6_obs")]
 position = Vector2(-286, -231)
@@ -79,71 +85,22 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 text = "Time: 00:00"
 
-[node name="StatsPanel" type="ColorRect" parent="UI" unique_id=1456905365]
-visible = false
-offset_left = 24.0
-offset_top = 120.0
-offset_right = 344.0
-offset_bottom = 470.0
-color = Color(0.08, 0.09, 0.12, 0.92)
-
-[node name="VBox" type="VBoxContainer" parent="UI/StatsPanel" unique_id=544582593]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 324.0
-offset_bottom = 450.0
-theme_override_constants/separation = 12
-
-[node name="TitleLabel" type="Label" parent="UI/StatsPanel/VBox" unique_id=1493823917]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 22
-text = "Character Stats (press Tab to close)"
-
-[node name="LevelLabel" type="Label" parent="UI/StatsPanel/VBox" unique_id=2086847754]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "Level: 1"
-
-[node name="ExpLabel" type="Label" parent="UI/StatsPanel/VBox" unique_id=1970085722]
-layout_mode = 2
+[node name="WaveLabel" type="Label" parent="UI"]
+offset_left = 1000.0
+offset_top = 44.0
 theme_override_colors/font_color = Color(0.6, 0.9, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "EXP: 0 / 5"
+theme_override_font_sizes/font_size = 20
+text = "Wave: 1"
 
-[node name="HpLabel" type="Label" parent="UI/StatsPanel/VBox" unique_id=1163995012]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "HP: 5 / 5"
-
-[node name="SpeedLabel" type="Label" parent="UI/StatsPanel/VBox" unique_id=1824095979]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "Speed: 220"
-
-[node name="IntervalLabel" type="Label" parent="UI/StatsPanel/VBox" unique_id=451098314]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "Attack interval: 0.45s"
-
-[node name="DamageLabel" type="Label" parent="UI/StatsPanel/VBox" unique_id=1358494396]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "Damage: 1"
-
-[node name="KillsLabel" type="Label" parent="UI/StatsPanel/VBox" unique_id=1218943579]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "Kills: 0"
+[node name="GoldLabel" type="Label" parent="UI"]
+offset_left = 1000.0
+offset_top = 76.0
+theme_override_colors/font_color = Color(0.98, 0.82, 0.3, 1)
+theme_override_font_sizes/font_size = 20
+text = "Gold: 250"
 
 [node name="GameOverPanel" type="ColorRect" parent="UI" unique_id=1626971165]
+process_mode = 3
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -168,7 +125,28 @@ text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="RestartButton" type="Button" parent="UI/GameOverPanel/Center/VBox" unique_id=1043014129]
+custom_minimum_size = Vector2(260, 50)
 layout_mode = 2
-text = "Restart"
+theme_override_font_sizes/font_size = 20
+text = "Retry"
+
+[node name="MenuButton" type="Button" parent="UI/GameOverPanel/Center/VBox"]
+custom_minimum_size = Vector2(260, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Main Menu"
+
+[node name="BossBar" parent="UI" instance=ExtResource("10_bossbar")]
+
+[node name="ShopUI" parent="UI" instance=ExtResource("11_shop")]
+inventory = NodePath("../../Player/WeaponInventory")
+wave_manager = NodePath("../../MobSpawner")
+player = NodePath("../../Player")
+
+[node name="UpgradeUI" parent="UI" instance=ExtResource("7_upgrade")]
+player = NodePath("../../Player")
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("8_pause")]
 
 [connection signal="pressed" from="UI/GameOverPanel/Center/VBox/RestartButton" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UI/GameOverPanel/Center/VBox/MenuButton" to="." method="_on_menu_pressed"]

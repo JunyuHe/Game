@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/boss_bar.gd" id="1_bossbar"]
+
+[node name="BossBar" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 74.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_bossbar")
+
+[node name="Back" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 64.0
+mouse_filter = 2
+color = Color(0.03137255, 0.03921569, 0.05490196, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 260.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(1, 0.35, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "BOSS"
+
+[node name="HpLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 6.0
+offset_right = 488.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "200 / 200 HP"
+horizontal_alignment = 2
+
+[node name="BarBg" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 40.0
+offset_right = 488.0
+offset_bottom = 54.0
+mouse_filter = 2
+color = Color(0.1215686, 0.08627451, 0.09803922, 1)
+
+[node name="BarFill" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 43.0
+offset_right = 485.0
+offset_bottom = 51.0
+mouse_filter = 2
+color = Color(0.89999998, 0.2, 0.25, 1)

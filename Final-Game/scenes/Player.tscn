@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
-[ext_resource type="Script" path="res://scripts/weapon.gd" id="2_weapon"]
-[ext_resource type="PackedScene" path="res://scenes/Bullet.tscn" id="3_bullet"]
+[ext_resource type="Script" path="res://scripts/weapon_inventory.gd" id="2_inventory"]
+[ext_resource type="Script" path="res://scripts/weapon_slots.gd" id="3_slots"]
+[ext_resource type="PackedScene" path="res://scenes/Weapon.tscn" id="4_weapon"]
 
 [sub_resource type="CircleShape2D" id="col_player"]
 radius = 14.0
@@ -23,10 +24,32 @@ color = Color(0.36, 0.72, 1, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("col_player")
 
+[node name="HealthBar" type="Node2D" parent="."]
+position = Vector2(0, -32)
+
+[node name="Back" type="ColorRect" parent="HealthBar"]
+offset_left = -23.0
+offset_top = -5.0
+offset_right = 23.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.0392157, 0.0470588, 0.0627451, 0.85)
+
+[node name="Fill" type="ColorRect" parent="HealthBar"]
+offset_left = -21.0
+offset_top = -3.5
+offset_right = 21.0
+offset_bottom = 3.5
+mouse_filter = 2
+color = Color(0.35, 0.8509804, 0.4, 1)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 5.0
 
-[node name="Weapon" type="Node2D" parent="."]
-script = ExtResource("2_weapon")
-bullet_scene = ExtResource("3_bullet")
+[node name="WeaponInventory" type="Node" parent="."]
+script = ExtResource("2_inventory")
+
+[node name="WeaponSlots" type="Node2D" parent="."]
+script = ExtResource("3_slots")
+weapon_scene = ExtResource("4_weapon")
